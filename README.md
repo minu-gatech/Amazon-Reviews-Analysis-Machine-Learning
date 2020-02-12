@@ -19,6 +19,8 @@ Python, HTML, CSS, Bootstrap, JavaScript, Flask, Jupyter Notebook, Machine Learn
 
 ## ![reviews](Amazon_Reviews_NLP/images/Page2_2.PNG)
 
+<br>
+
 ![reviews](Amazon_Reviews_NLP/images/Page3_1.PNG)
 
 ![reviews](Amazon_Reviews_NLP/images/Page3_2.PNG)
