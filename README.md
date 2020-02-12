@@ -1,4 +1,4 @@
-# Amazon Reviews Analysis - Machine Learning
+# Amazon Consumer Reviews Analysis & Prediction - Machine Learning
 
 
 ## Data Source
@@ -11,13 +11,13 @@ Python, HTML, CSS, Bootstrap, JavaScript, Flask, Jupyter Notebook, Machine Learn
 
 ## Aim - To develop a machine learning model that predict the consumer reviews as either Positive or Negative.
 
-- ![reviews](Amazon_Reviews_NLP/images/Page1_1.PNG)
+## ![reviews](Amazon_Reviews_NLP/images/Page1_1.PNG)
 
-- ![reviews](Amazon_Reviews_NLP/images/Page1_2.PNG)
+## ![reviews](Amazon_Reviews_NLP/images/Page1_2.PNG)
 
-- ![reviews](Amazon_Reviews_NLP/images/Page2_1.PNG)
+## ![reviews](Amazon_Reviews_NLP/images/Page2_1.PNG)
 
-- ![reviews](Amazon_Reviews_NLP/images/Page2_2.PNG)
+## ![reviews](Amazon_Reviews_NLP/images/Page2_2.PNG)
 
 ![reviews](Amazon_Reviews_NLP/images/Page3_1.PNG)
 
