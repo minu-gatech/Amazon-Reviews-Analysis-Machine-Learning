@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Sentiment Analysis Visualization Dashboard</title>
+
+    <!-- Boostrap Stylesheet -->
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" media="screen"> 
+  
+    <!-- Our own CSS stylesheet -->
+
+    <link rel="stylesheet" href="../../assets/css/styles.css" media="screen">
+    
+  </head>
+
+  <body>
+ 
+            <!-- Start of navbar -->
+            {% extends "layout.html" %}
+            {% block content %}
+                          
+                            
+        <div class="container" >
+          <section class="row">
+            <div class="col-md-12">
+              <img src="../static/assets/images/precisionIMAGE7.jpg" class="center"/>
+            </div>
+           </section>
+        </div>
+      
+        <div class="container">
+          
+            <article class="description-content">   
+                            <section class="row" >
+                              <div class="col-md-12">
+                                    
+                                   
+                                 <h1 style="text-align:center" class="description-header-precision" >How to Evaluate the Accuracy Score of Model</h1>
+                                  <br>
+                                 <h3 style="text-align:center" class="description-header-precision" style="font-size:25px"> Hyperparameters Tuning of Models to make them perform at their highest accuracy </h3>
+                              
+                                  <hr class="description-hr"/> 
+                                  <p style="font-size:20px">Every Machine Learning model has several parameters that can be changed and several 
+                                    combinations of parameter settings  can be used in Grid Search to find the right combination 
+                                  that will make the model function at its highest accuracy</p>
+                                 
+                                  <h3> Examples </h3>
+                                  
+                                  <h1 class="description-header-precision" style="font-size:25px">Support Vector Classifier</h1>
+                                  <img src="/static/images/svmparam.jpg" class="center"/>
+                                  
+                                  <hr class="description-hr"/>   
+                                  
+                                  <h1 class="description-header-precision" style="font-size:25px">Logistic Regression Classifier</h1>
+                                  <img src="/static/images/logregparam.jpg" class="center"/>
+                                  
+                                </div>
+                             </section>
+                                    <hr class="description-hr"/>  
+                                <section class="row">
+                                        <div class="col-md-8">
+                                            <h1 class="description-header-precision" style="font-size:25px">Model Scores and Confusion Matrices</h1>
+                                          <p style="font-size: 20px">A confusion matrix is a summary of prediction results on a classification problem.
+                                              The number of correct and incorrect predictions are summarized with count values and broken down by each class. This is the key to the confusion matrix.
+                                              The confusion matrix shows the ways in which your classification model is confused when it makes predictions.
+                                              It gives us insight not only into the errors being made by a classifier but more importantly the types of errors that are being made.
+                                          </p>
+                                        </div>
+        
+                                        <div class="col-md-4">
+                                        <img    src="../static/assets/images/images (1).png" alt="">
+                                      </div>
+                                
+                                   
+                                  </section>
+                        </article>
+                       </div> 
+                    <br>
+            
+                               
+        
+                            
+                  
+                          
+                 <div class="container">
+                     <article class="description-content"> 
+                        <section class="row">
+                            <div class="col-md-12"> 
+                                <h1 style="text-align:center" class="description-header-precision" >Evaluation</h1>
+                                
+                              </div> 
+
+                        </section>
+                             
+                        <hr class="description-hr"/>
+                      
+                           <section class="row">
+                             
+                              <div class="col-md-2">
+                                  <h2 class="description-header-precision" style="text-align:center" >Model</h2>
+                              </div>
+                              <div class="col-md-5">
+                                <h2 class="description-header-precision" style="text-align:center" >Classification Report</h2>
+                              </div>
+                              <div class="col-md-5">
+                                <h2 class="description-header-precision" style="text-align:center" >Confusion Matrix</h2>
+                              </div> 
+                            </section>  
+                     <hr class="description-hr"/> 
+                         
+                             
+                                  
+                                  <section class="row">
+                                      <div class="col-md-2"> <h3  style="text-align:center">Decision Tree </h3> </div>
+                                      <div class="col-md-5"> <img class="precision_image"  src="../static/assets/images/DecisionTreeCReport.png" alt="Decision Tree Classification report"></div>
+                                      <div class="col-md-5">  <img class="precision_image"  src="../static/assets/images/DecisionTreeCM.png" alt="Decision confusion matrix"></div>
+                                  </section>
+                       
+                 
+
+                                      
+                                  <section class="row">
+                                      <div class="col-md-2"> <h3 style="text-align:center">K-Nearest Neighbor </h3> </div>
+                                      <div class="col-md-5">  <img class="precision_image"  src="../static/assets/images/KNNCReport.png" alt="KNN Classification report"></div>
+                                      <div class="col-md-5">  <img class="precision_image"  src="../static/assets/images/KNNCM.png" alt="KNN confusion matrix"></div>
+                                  </section>
+                              
+                     
+
+               
+                             
+                                  <section class="row">
+                                      <div class="col-md-2"> <h3 style="text-align:center">Random Forest </h3> </div>
+                                      <div class="col-md-5">  <img  class="precision_image"   src="../static/assets/images/RandomForestReport.png" alt="RandonForest Classification report"></div>
+                                      <div class="col-md-5">  <img class="precision_image"  src="../static/assets/images/RandomForestCM.png" alt="RandonForest  confusion matrix"></div>
+                                  </section>
+                              
+              
+                  
+                            
+                                  <section class="row">
+                                      <div class="col-md-2"> <h3 style="text-align:center"> Support Vector Classifier </h3> </div>
+                                      <div class="col-md-5">  <img class="precision_image"  src="../static/assets/images/SVCcreport.png" alt="SVC Classification report"></div>
+                                      <div class="col-md-5">  <img class="precision_image"  src="../static/assets/images/SVCCM.png" alt="svcconfusion matrix"></div>
+                                  </section>
+                              
+                  
+                     
+                         
+                                  <section class="row">
+                                      <div class="col-md-2"> <h3 style="text-align:center">Naive Bayes </h3> </div>
+                                      <div class="col-md-5">  <img class="precision_image"  src="../static/assets/images/NBCreport.png" alt="NB Classification report"></div>
+                                      <div class="col-md-5">  <img class="precision_image"  src="../static/assets/images/SVCCM.png" alt="NB confusion matrix"></div>
+                                  </section>
+                              
+             
+                      
+                    
+                             
+                                  <section class="row">
+                                      <div class="col-md-2"> <h3 style="text-align:center">Logistic Regression </h3> </div>
+                                      <div class="col-md-5">  <img class="precision_image"  src="../static/assets/images/LogRegCReport.png" alt="LogReg Classification report"></div>
+                                      <div class="col-md-5">  <img class="precision_image"  src="../static/assets/images/LogRegCM.png" alt="LodRegconfusion matrix"></div>
+                                  </section>
+                            
+             
+                      </article>
+                    </div>
+               
+                        
+                           
+                              <div class="container">
+                                  <article class="description-content"> 
+                                  <section class="row">
+                                      <h1  style="text-align:center" > Accuracy Scores of  Various Model </h1>
+                                      <br><br>
+                                    <div class="col-md-8">
+                                   
+
+                                    <img  class="precision_image2"  src="../static/assets/images/tableaumodels .png" alt="Tableau">
+                                    </div>
+                                    <div  class="col-md-4" >
+                                        <p style="text-align:center"  style="font-size: 18px"> DT = Decision Tree</p>
+                                        <p style="text-align:center"  style="font-size: 18px">  KNN = K K-Nearest Neighbor</p>
+                                        <p style="text-align:center"  style="font-size:  18px"> RF = Random Forest  </p>
+                                        <p style="text-align:center"  style="font-size: 18px">  SVC = Support Vector Classifier</p>
+                                        <p style="text-align:center"  style="font-size: 18px">  NB = Naive Bayes</li>
+                                        <p style="text-align:center"  style="font-size: 18px">  LR = Logistic Regression</p>
+                                      </div>
+                                     
+                                  </article>
+                            
+                                  </section>
+                              
+                          </div>
+
+
+
+ <br><br>
+
+               
+
+ <div class="container">
+  <section class="row">
+      <div class="col-sm-12 text-center">
+
+          <a href="{{ url_for('index') }}"><button type="button" class="btn btn-primary btn-lg "> Home </button></a>
+
+          <a href="{{ url_for('datatabicon') }}"><button type="button" class="btn btn-primary btn-lg "> Data </button></a>
+  
+
+          <a href="{{ url_for('visualicon') }}"><button type="button" class="btn btn-primary btn-lg ">Visualization</button></a>
+      
+      
+          <a href="{{ url_for('modelicon') }}"><button type="button" class="btn btn-primary btn-lg ">Model </button></a>
+              
+  
+          <a href="{{ url_for('precisionicon') }}"><button type="button" class="btn btn-primary btn-lg ">Precision</button></a>
+      
+          <a href="{{ url_for('predictoricon') }}"><button type="button" class="btn btn-primary btn-lg ">Predictor</button></a>
+      </div>  
+  </section>
+</div>
+
+
+                <!-- <br><br><br><br><br><br><br>  -->
+                  <!-- Start of footer -->
+                  <footer class="footer">
+                  
+                    <p class="text-center" style="font-size:20px"><a href="https://www.linkedin.com/in/georgeoddoye/" target="_blank">George Oddoye</a>, 
+                      <a href="https://www.linkedin.com/in/minukhosla/" target="_blank">Minu Khosla</a>,
+                      <a href="https://www.linkedin.com/in/vidhyaj1974/" target="_blank">Vidhyanandhi Jegannathan</a>
+                    </p>
+                    <p class="text-center" style="font-size:24px">George Institute of Technology  Data Analytics : Sentiment Analysis Team</p>
+                  </footer>
+                  <!-- End of footer -->
+                  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script> -->
+                
+              
+              
+                  
+            
+            
+                  
+           
+  
+
+    <!-- jQuery CDN -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    {% endblock %}
+  </body>
+
+</html>

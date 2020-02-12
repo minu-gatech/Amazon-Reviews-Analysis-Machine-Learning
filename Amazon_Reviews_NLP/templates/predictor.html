@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Sentiment Analysis Visualization Dashboard</title>
+
+    <!-- Boostrap Stylesheet -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen"> 
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" media="screen">  -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <!-- Our own CSS stylesheet -->
+   
+    <link rel="stylesheet" href="../static/css/styles.css" media="screen">
+
+  </head>
+
+  <body>
+  <!-- <div class="wrapper"> -->
+      {% extends "layout.html" %}
+      {% block content %}
+        <!-- ############################################################            -->
+        <div class="container"  >
+          <section class="row">
+            <div class="col-md-12"> 
+            <article class="description-content">
+                <h1 class="description-header" style="font-size:36px">Testing the Model with reviews from any source</h1>
+                 <hr class="description-hr"/>
+                <h1 class="description-header">Choose reviews from any website </h1>
+                <!-- <hr class="description-hr"/> -->
+
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" > 
+                       Review Choices <div class="caret"> </div> 
+                    </button>
+  
+                                <ul class="dropdown-menu">
+                                  <li><button class="btn btn primary"></i><a href="https://www.amazon.com/product-reviews/B07VT4RJ51/ref=cm_cr_unknown?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=1#reviews-filter-bar" target="_blank">Amazon</a><i class="fa fa-amazon"> </i></button> </li>
+                                  <li> <button class="btn btn primary"><a href="https://www.angieslist.com/companylist/us/ny/albany/long-energy-reviews-297292.htm/" target="_blank">Angie's List</a></button></li>
+                                  <li> <button class="btn btn primary"><a href="https://www.glassdoor.com/Reviews/index.htm/" target="_blank">Glassdoor </a></i></button></li>
+                                  <li> <button class="btn btn primary"><a href="https://www.studentsreview.com/GA/Georgia_Institute_of_Technology.html/" target="_blank">Georgia Tech Reviews</a></button></li>
+                                  <li> <button class="btn btn primary"><a href="https://www.tripadvisor.com/?fid=406251b9-380b-4dd6-8cc6-0f9a5e29a42a/" target="_blank">TripAdvisor </a><i class="fa fa-tripadvisor" aria-hidden="true"></i></button></li>
+                                  <li> <button class="btn btn primary"><a href="https://www.yelp.com/" target="_blank">Yelp</a><i class="fa fa-yelp" aria-hidden="true"></i></button></li>
+                                    
+                                </ul>
+                        
+                  </div>
+
+                <br>
+                <br>
+                <br>
+                
+
+                <br>
+                <br>
+                <div class=" row">
+                    <div class="col-md-6">
+              
+                            <form action="{{ url_for('predict')}}" method="POST">
+                                <p>Enter Your Message Here</p>
+                                <!-- <input type="text" name="comment"/> -->
+                                <textarea name="message" rows="10" cols="65"></textarea>
+                                <br/>
+                                <br>
+                                <input type="submit" class="btn btn-primary btn-lg" value="Predict">
+                                
+                              </form>
+                    </div>
+                    <div class="col-md-6">
+                                 <!-- {{prediction}}  -->
+                                 <!-- <h3> The Input Review</h3> -->
+                                    {{message}}
+                                  <br><br>
+                                  {% if prediction == 'This review is POSITIVE'%}
+                                  <h2 style="color:green;">This review is POSITIVE </h2>
+                                  {% elif prediction == 'This review is NEGATIVE'%}
+                                  <h2 style="color: red;">This review is NEGATIVE </h2>
+                                  {% endif %}     
+                                  
+                                  
+                    </div>
+                </div>       
+              </article>
+            </div>
+          </section>
+        </div>
+      </div> 
+      <br>  
+                  <br><br>
+                          <!-- ############################################################            -->
+                        <div class="container"  >
+                          <section class="row">
+                            <div class="col-md-12"> 
+                            <article class="description-content">
+                  <img src="static/images/humanerror.jpg" class="col-md-12"/>
+               
+                  <p>Don’t buy this phone!!!! I bought a beautiful blue color, it worked PERFECTLY for two months then it got blocked by T-mobile. I contacted T-mobile and guess what? They tel me this phone was previously owned by a guy who didn’t pay off the full price. Now I’m stuck with a BLOCKED IMEI PHONE and Nono one can do anything about it!!! Tried to return it and the seller won’t accept my return. Currently working on starting an A-Z return request via amazon. Such a disgrace.</p>
+                  <p>Stemming: Nick is cool vs Nick is the coolest</p>
+                            </article>
+                          </div>
+                        </section>
+                      </div>
+                    </div> 
+                    <br>
+                  <!-- <hr class="description-hr"/> -->
+
+                    <!-- ############################################################            -->
+                    <div class="container"  >
+                      <section class="row">
+                        <div class="col-md-12"> 
+                        <article class="description-content">
+                      <p> Our Model is predicting considerably well if a review is positive or negative . That is valuable to a company or business . However would it not be more advantageous if we could find out what are some of the features that are receiving positive or negative sentiment . There are many complex algorithms that do fulfil this purpose . But here is a very simple way to get a fairly good idea . We have used WORLDCLOUDS to accomplish this . </p>
+                      <h3>Negative Reviews</h3>
+                      <section class="row">
+                        <div class="col-md-4"> 
+                          <img src="../static/assets/images/wordcloudwhiteneg1.png" alt=""> 
+                        </div>
+                        <div class="col-md-4"> 
+                            <p><font size="4"> All the prominent words show  satisfaction for specific features of the product that can be further to increase sales</font></p>
+                          </div>
+                          <div class="col-md-4"> 
+                              <img src="../static/assets/images/wordcloudwhiteneg2.png" alt=""> 
+                            </div>
+                          </section>
+                          
+                    </div>
+                            <!-- ############################################################            -->
+                            <div class="container"  >
+                              <section class="row">
+                                <div class="col-md-12"> 
+                                <article class="description-content">
+                    <h3>Positive Reviews</h3>
+                    <section class="row">
+                        <div class="col-md-4"> 
+                          <img src="../static/assets/images/wordcloudwhitepos2.png" alt=""> 
+                        </div>
+                        <div class="col-md-4"> 
+                          <p><font size="4"> All the prominent words show  complaints for specific features of the product that can be easily addressed to increase sales </font></p>
+                          </div>
+                          <div class="col-md-4"> 
+                              <img src="../static/assets/images/wordcloudwhitepos3.png" alt=""> 
+                              
+                            </div>
+                          </section>
+                        </article>
+                      </div>
+                    
+                      
+                </div> 
+                <br>
+                  
+
+                </article>
+
+
+              </div>
+              
+            </div>
+            
+            <br><br>
+
+            <div class="container">
+              <section class="row">
+                  <div class="col-sm-12 text-center">
+
+                      <a href="{{ url_for('index') }}"><button type="button" class="btn btn-primary btn-lg "> Home </button></a>
+          
+                      <a href="{{ url_for('datatabicon') }}"><button type="button" class="btn btn-primary btn-lg "> Data </button></a>
+              
+  
+                      <a href="{{ url_for('visualicon') }}"><button type="button" class="btn btn-primary btn-lg ">Visualization</button></a>
+                  
+                  
+                      <a href="{{ url_for('modelicon') }}"><button type="button" class="btn btn-primary btn-lg ">Model </button></a>
+                          
+              
+                      <a href="{{ url_for('precisionicon') }}"><button type="button" class="btn btn-primary btn-lg ">Precision</button></a>
+                  
+                      <a href="{{ url_for('predictoricon') }}"><button type="button" class="btn btn-primary btn-lg ">Predictor</button></a>
+                  </div>  
+              </section>
+        </div>
+        
+
+
+
+<br><br>
+
+
+    <footer class="footer">
+      
+      <p class="text-center" style="font-size:20px"><a href="https://www.linkedin.com/in/georgeoddoye/" target="_blank">George Oddoye</a>, 
+        <a href="https://www.linkedin.com/in/minukhosla/" target="_blank">Minu Khosla</a>,
+        <a href="https://www.linkedin.com/in/vidhyaj1974/" target="_blank">Vidhyanandhi Jegannathan</a>
+      </p>
+      <p class="text-center" style="font-size:24px">George Institute of Technology  Data Analytics : Sentiment Analysis Team</p>
+    </footer>
+    <!-- End of footer -->
+
+    <!-- jQuery CDN -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    {% endblock %}
+    
+  </body>
+
+</html>

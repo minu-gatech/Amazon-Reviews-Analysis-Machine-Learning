@@ -1,0 +1,17 @@
+<!-- <li class="dropdown">
+                  <a href="#" class="map-dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Maps <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li class="maptab"><a href="{{ url_for('clustermap') }}" >2018 Gun Violence </a></li>
+                      <li class="maptab"><a href="{{ url_for('heatmap') }}">2013-2018 Gun Violence</a></li>
+                      <li class="maptab"><a href="{{ url_for('choroplethmap') }}">2019 Mass Shootings</a></li>
+                    </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="chart-dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Charts <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class="charttab"><a href="{{ url_for('linechart') }}" >2014-2018 Monthly Reports</a></li>
+                  <li class="charttab"><a href="{{ url_for('barchart') }}" >2014-2017 Yearly Reports</a></li>
+                  <li class="charttab"><a href="{{ url_for('piechart') }}">2014-2019 Shootings Types</a></li>
+                </ul>
+              </li>
+              <li class="datatab"><a href="{{ url_for('data') }}">Data</a></li> -->

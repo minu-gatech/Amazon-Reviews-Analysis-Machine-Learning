@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>AMAZON REVIEWS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/datastyle.css">
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  
+
+  <style>
+
+    th{
+      color:white;
+    }
+
+    .container{
+    /* background-color: rgb(113, 120, 121); */
+    background-color: rgb(32, 75, 104);
+    color: white;
+  }
+
+  .filter{
+    color: black;
+  }
+
+  .col-md-4 h5{
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+ 
+  #table-area tbody td {
+    color:black;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {background: #CCC}
+  tr:nth-child(odd) {background: #4D4D4D}
+  
+  </style>
+
+</head>
+
+<body>
+    <div class="wrapper">
+    {% extends "layout.html" %}
+    {% block content %}
+            
+
+    
+    <div class="hero text-center">
+      <h1 style="color:white;">Amazon Reviews - Dataset</h1>
+      <p style="color:white;">The Truth is Out There</p>
+      <img src="../static/images/ML_dancer.gif" id="MLdancer">
+    </div>
+    <br>
+    
+    
+
+    <div class="container">
+
+      <!-- ROW STARTED -->
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="well">
+            <h5> Rating Score:</h5>
+            <select id="review_score" class="filter">
+              <option id="review_score" value="">Please select</option>
+              <option id="review_score" value="1">1</option>
+              <option id="review_score" value="2">2</option>
+              <option id="review_score" value="3">3</option>
+              <option id="review_score" value="4">4</option>
+              <option id="review_score" value="5">5</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="well">
+            <h5> Do Recommend:</h5>
+            <select id="review_recommend" class="filter">
+              <option id="review_recommend" value="">Please select</option>
+              <option id="review_recommend" value="TRUE">TRUE</option>
+              <option id="review_recommend" value="FALSE">FALSE</option>
+              <option id="review_recommend" value="blank">(Blank)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="well">
+            <h5> Review Type:</h5>
+            <select id="review_type" class="filter">
+              <option id="review_type" value="">Please select</option>
+              <option id="review_type" value="POSITIVE">POSITIVE</option>
+              <option id="review_type" value="NEGATIVE">NEGATIVE</option>
+            </select>
+          </div>
+        </div>
+
+      </div> 
+      <!-- ROW ENDED -->
+
+      <!-- ROW STARTED -->
+      <div class="row">
+        <div class="col-md-12">
+          <h5 id="record_count"></h5>
+        </div>
+      </div>
+      <!-- ROW ENDED -->
+
+    </div>
+
+      <!-- ROW STARTED -->
+    <div class="container" id="cont2" >
+      <div class="row margin-top-50">
+        <div class="col-md-12">
+          <div id="table-area" class="">
+            <table id="ufo-table" class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="table-head">No.</th>
+                  <th class="table-head">Brand</th>
+                  <th class="table-head">DoRecommend</th>
+                  <th class="table-head">Rating Score</th>
+                  <th class="table-head">Review Text</th>
+                  <th class="table-head">Review Title</th>
+                  <th class="table-head">Rating Type</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- ROW ENDED -->
+
+    </div>
+
+
+
+
+
+    </div>
+    
+  
+    <script src="static/js/data.js"></script>
+
+
+    <br><br>
+
+                
+
+
+    <div class="container">
+      <section class="row">
+          <div class="col-sm-12 text-center">
+
+              <a href="{{ url_for('index') }}"><button type="button" class="btn btn-primary btn-lg "> Home </button></a>
+  
+              <a href="{{ url_for('datatabicon') }}"><button type="button" class="btn btn-primary btn-lg "> Data </button></a>
+      
+
+              <a href="{{ url_for('visualicon') }}"><button type="button" class="btn btn-primary btn-lg ">Visualization</button></a>
+          
+          
+              <a href="{{ url_for('modelicon') }}"><button type="button" class="btn btn-primary btn-lg ">Model </button></a>
+                  
+      
+              <a href="{{ url_for('precisionicon') }}"><button type="button" class="btn btn-primary btn-lg ">Precision</button></a>
+          
+              <a href="{{ url_for('predictoricon') }}"><button type="button" class="btn btn-primary btn-lg ">Predictor</button></a>
+          </div>  
+      </section>
+</div>
+
+
+
+  {% endblock %}
+ </body>
+
+</html>

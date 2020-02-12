@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Sentiment Analysis Visualization Dashboard</title>
+
+    <!-- Boostrap Stylesheet -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen"> 
+    
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Our own CSS stylesheet -->
+   
+    <link rel="stylesheet" href="../static/css/styles.css" media="screen">
+
+  </head>
+
+  <body>
+    <div class="wrapper">
+      {% extends "layout.html" %}
+      {% block content %}
+      <div class="container">
+        <section class="row">
+ 
+      </div>
+    
+      
+     
+        <div class="container" >
+          <section class="row">
+            <div class="col-md-12">
+              <img src="/static/images/model.jpg" class="center"/>
+              <br>
+              <article class="description-content">
+                
+                <br>
+                <h1>Data</h1>
+                <hr class="description-hr"/>
+                <p>The purpose of this project was to create a model, using NLP and machine learning, which could predict if any given review is positive or negative. The model was trained and tested using data found on <a href="https://www.kaggle.com/datafiniti/consumer-reviews-of-amazon-products" target="_blank">Kaggle</a>. The dataset contained a list of over 34,000 reviews of Amazon products like the Kindle, Fire TV, ect. It had 21 columns ranging from product asin to the date the review was added. The columns we were concerned about, in regards to the model, were "reviews.text" and "reviews.rating". However before we could select the relevant columns the data needed to be downloaded and read. 
+                </p>
+                <img src="/static/images/data.jpg" class="center"/>
+
+                 <p>This was achieved using pandas which is a software library written for the Python programming language for data manipulation and analysis. Pandas, which is derived from "panel data", is capable of accomplishing several task but in regards to extraction it's ability for reading/importing and writing/exporting data between in-memory data structures and different file formats such as csv, excel, json, ect was utilized. A pd.read_csv() function was called on the file path created above and the information was stored into a dataframe named df.</p>
+                 <img src="/static/images/pdread.jpg" class="center"/>
+                 <br><br>
+                 <p>Now that the data had been loaded the cleaning process could begin. As mentioned before the columns we were most interested in were "reviews.text" and "reviews.rating". When inspecting the type each of these columns it was discovered that "reviews.text" was of type string while "reviews.rating" was of type float. Reviews.rating as type float presented an issue because the machine learning libraries that were going to be used were classification models which typically only want text information. The column could have been converted to a string but that most certainty would have reduced the accuracy of the model due to the several factors but most importantly the chance that specific words were only used in each of the star ratings was unlikely. So in order to address this issue the star ratings were converted into either POSITIVE (5 and 4 star reviews) and NEGATIVE (3 stars and below reviews).</p>
+                 <img src="/static/images/pos_neg.jpg" class="center"/>
+                <p>This was achieved using a for loop on the "reviews.rating" column followed by an if/else conditional statement that would see if the current review rating was greater then 3 or not. If the rating was greater than 3 a POSITIVE was appended to an empty list, called review_classifaction, otherwise a NEGATIVE was appended. A new column was created in the df dataframe named "review_rating" which would now serve as our "y" during the train test split phase.  </p>
+                <br><br>
+                <p>The next step in the cleaning process was in regards to the count of positive vs negative reviews. When a .value_counts() function was called on the newly created ["reviews_rating"] column, it was discovered that there were 2344 (6.76%) negative reviews and 32316 (93.24%) positive reviews.</p>
+                <img src="/static/images/valuecounts.jpg" class="center"/>
+                <p>This stark difference in positive and negative reviews would cause issues with the models ability to predict positive vs negative reviews accurately. When using the dataset in its current form the model predicted positive reviews with 96.6% accuracy which was fantastic but it had an accuracy of only 41.2% for negative reviews. In order to address this issue the number of records were matched in regards to positive and negative.</p>
+                <img src="/static/images/negativedf.jpg" class="center"/>
+                <p>A new dataframe named df_negative was created and it included all the information from the original dataframe but it only included information were ['review_rating'] was == NEGATIVE. This narrowed down the dataframe to only include records that were true for that conditional statement. The same procedure was followed for positive reviews and then the first 2344 records were selected and stored into a dataframe named df_positive.</p>
+                <img src="/static/images/positivedf.jpg" class="center"/>
+                <br><br>
+                <p>Finally the df_negative and df_positive were concatenated into a final dataframe named amazon which was exported as a csv file using pd.to_csv() function.</p>
+                <img src="/static/images/amazondf.jpg" class="center"/>
+                <br>
+                <img src="/static/images/tocsv.jpg" class="center"/>
+              </article>
+            
+          </section>
+        </div>
+      </div>
+      <br>
+          <!-- ############################################################            -->
+                
+                <div class="container"  >
+                  <section class="row">
+                    <div class="col-md-12"> 
+                    <article class="description-content">
+                <h1>Text Cleaning</h1>
+                <hr class="description-hr"/>
+                <h3> Importing dependencies</h3>
+                <img src="/static/images/stopimport.jpg" class="center"/><br>
+                <h3> Establishing the Corpus</h3>
+                <img src="/static/images/corpus.jpg" class="center"/><br><br>
+                   
+                    
+                    <h3>Creating the Bag of Words model </h3>
+                    <img src="/static/images/cv1.jpg" class="center"/><br>
+                    
+                
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+      <br>
+
+          <!-- ############################################################            -->
+          <div class="container"  >
+            <section class="row">
+              <div class="col-md-12"> 
+              <article class="description-content">
+                <h1>Pre-Processing</h1>
+                <hr class="description-hr"/>
+                <p>With the training and testing data now split it was necessary for it to be vectorized because machine learning models do not work with raw text. Instead they need to be converted to zeros and ones and stored in an array. This can be accomplished by CountVectorizer as well as TfidfVectorizer. Due to the size of our dataset performing NLP text cleaning actually made our models perform worse. For this reason bag of words and CountVectorizer were not utilized. Instead TfidfVectorizer was used because unlike CountVectorizer which gives all words the same weight, which is why it is necessary to remove stopwords, TfidfVectorizer downscales words that appear a lot across documents. This means that stop words such as "the, this, and that" which appear the most over a given corpus are weighted far less then words such as "good, bad, enjoy" which would appear less often and therefore carry far more weight.
+                  <img src="/static/images/tfid.jpg" class="center"/>
+                </p>
+                <br>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+      <br>
+                <!-- ############################################################            -->
+                <div class="container"  >
+                  <section class="row">
+                    <div class="col-md-12"> 
+                    <article class="description-content">
+                <h1>Train Test Split</h1>
+                <hr class="description-hr"/>
+                <p>Sklearn (or Scikit-learn) is a Python library that offers various features for data processing that can be used for classification, clustering, and model selection. Train_test_split is a function in Sklearn model selection for splitting data arrays into two subsets: for training data and for testing data. Using the same dataset for both training and testing leaves room for miscalculations, thus increases the chances of inaccurate predictions.
+                The train_test_split function allows you to break a dataset with ease while pursuing an ideal model. Train test split has several paramaters the first of which is selecting the X and y you wish to utilize from the dataset. As mentioned above the X was set to "reviews.text" while y was set to "review_rating".</p>
+                <img src="/static/images/xy.jpg" class="center"/>
+                <p>The next parameter of importance is test_size which specifies the size of the testing dataset. The default is set to 0.33 (33%) which served the model well but when different testing sizes were used it was discovered that a test size of 0.23 (23%) yielded the best model.</p>
+                <img src="/static/images/tts.jpg" class="center"/>
+                <br>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+      <br>
+          <!-- ############################################################            -->
+          <div class="container"  >
+            <section class="row">
+              <div class="col-md-12"> 
+              <article class="description-content">
+                <h1>Classifiers</h1>
+                <hr class="description-hr"/>
+                <p>Classification is the process of predicting the class of given data points. Classes are sometimes called as targets/ labels or categories. Classification predictive modeling is the task of approximating a mapping function (f) from input variables (X) to discrete output variables (y).
+                  Classification belongs to the category of supervised learning where the targets also provided with the input data. A classifier utilizes some training data to understand how given input variables relate to the class. Within classification there are two types of learns which are lazy learners and eager learner. Lazy learners simply store training data and wait for test data to appear at which time it conducts classification based on the most related data in the stored training data (Ex. KNN). Lazy learners have less training time but more time in prediction.
+                  Eager learners on the other hand construct an entire classification model based on the training data before receiving any test data. This model must be able to commit a single hypothesis that covers the entire testing set (Ex. Decision Tree, Naive Bayes). Due to the model construction, eager learners take a long time for train and less time to predict.
+                </p>
+                <img src="/static/images/classification.png" class="center"/>
+                <p>In order to find the best model for the prediction of reviews several were tested.
+                  <ul>
+										<li><font size="4" color="dodgerblue">Decision Trees</font></li>
+										<li><font size="4" color="dodgerblue">k-Nearest Neighbors</font></li>
+										<li><font size="4" color="dodgerblue">Random Forest</font></li>
+										<li><font size="4" color="dodgerblue">Support Vector Classifier</font></li>
+										<li><font size="4" color="dodgerblue">Naive Bayes</font></li>
+										<li><font size="4" color="dodgerblue">Logistic Regression</font></li>
+                    </ul> 
+                  
+                  </article>
+                </div>
+              </section>
+            </div>
+          </div>
+          <br>
+              <!-- ############################################################            -->
+              <div class="container"  >
+                <section class="row">
+                  <div class="col-md-12"> 
+                  <article class="description-content">
+                <p><b><font size="6">Decision Trees</font></b><hr class="description-hr"/><br>
+                  
+                  <img src="/static/images/decisiontrees.jpg"/><br>
+         
+                  Decision tree builds classification or regression models in the form of a tree structure. It utilizes an if-then rule set. The rules are learned sequentially using the training data one at a time.  Attributes at the top of the tree have more impact towards in the classification and they are identified using the information gain concept. A decision tree can be easily over-fitted generating too many branches and may reflect anomalies due to noise or outliers.</p>
+             
+                  <img src="/static/images/dtmodel.jpg" class="center"/><br><br>
+                  </article>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <br>
+                <!-- ############################################################            -->
+            <div class="container"  >
+              <section class="row">
+                <div class="col-md-12"> 
+                <article class="description-content">
+                <p><b><font size="6">k-Nearest Neighbors</font></b><hr class="description-hr"/><br>
+                  
+                  <img src="/static/images/knnmodel.jpg" /><br>k-Nearest Neighbor is a lazy learning algorithm which stores all instances correspond to training data points in n-dimensional space. When an unknown discrete data is received, it analyzes the closest k number of instances saved (nearest neighbors)and returns the most common class as the prediction</p>
+                  <img src="/static/images/knnfit.jpg" class="center"/><br><br>
+                </article>
+              </div>
+            </section>
+          </div>
+        </div> 
+        <br>
+            <!-- ############################################################            -->
+            <div class="container"  >
+              <section class="row">
+                <div class="col-md-12"> 
+                <article class="description-content">
+                  <p><b><font size="6">Random Forest</font></b>
+                    <hr class="description-hr"/><br>
+                    
+                  <img src="/static/images/rfmodel2.jpg" /><br>The fundamental concept behind random forest is a simple but powerful one — the wisdom of crowds. A large number of relatively uncorrelated models (trees) operating as a committee will outperform any of the individual constituent models. The low correlation between models is the key, uncorrelated models can produce ensemble predictions that are more accurate than any of the individual predictions. The reason for this wonderful effect is that the trees protect each other from their individual errors </p>
+                  <img src="/static/images/rffit.jpg" class="center"/><br><br>
+                </article>
+              </div>
+            </section>
+          </div>
+        </div> 
+        <br>
+        <!-- ############################################################            -->
+        <div class="container"  >
+          <section class="row">
+            <div class="col-md-12"> 
+            <article class="description-content">
+                  <p><b><font size="6">Support Vector Machine</font></b><hr class="description-hr"/><br>
+                  <img src="/static/images/svm1.jpg" /><br>A Support Vector Machine (SVM) is a discriminative classifier formally defined by a separating hyperplane. In other words, given labeled training data (supervised learning), the algorithm outputs an optimal hyperplane which categorizes new examples. In two dimentional space this hyperplane is a line dividing a plane in two parts where in each class lay in either side. </p>
+                  <img src="/static/images/svmfit.jpg" class="center"/><br><br>
+                </article>
+              </div>
+            </section>
+          </div>
+        </div> 
+        <br>
+        <!-- ############################################################            -->
+        <div class="container"  >
+          <section class="row">
+            <div class="col-md-12"> 
+            <article class="description-content">
+                  <p><b><font size="6">Naive Bayes</font></b><hr class="description-hr"/><br>
+                  <img src="/static/images/nb2.jpg" class="center"/><br>Naive Bayes classifiers are a collection of classification algorithms based on Bayes’ Theorem. It is not a single algorithm but a family of algorithms where all of them share a common principle, i.e. every pair of features being classified is independent of each other. Bayes’ Theorem finds the probability of an event occurring given the probability of another event that has already occurred. </p>
+                  <img src="/static/images/nbfit.jpg" class="center"/><br><br>
+                </article>
+              </div>
+            </section>
+          </div>
+        </div> 
+        <br>
+        <!-- ############################################################            -->
+        <div class="container"  >
+          <section class="row">
+            <div class="col-md-12"> 
+            <article class="description-content">
+                  <p><b><font size="6">Logistic Regression</font></b><hr class="description-hr"/><br>
+                  <img src="/static/images/logreg1.jpg" class="center"/><br>Logistic Regression is a Machine Learning algorithm which is used for the classification problems, it is a predictive analysis algorithm and based on the concept of probability. </p>
+                  <img src="/static/images/logregfit1.jpg" class="center"/>
+                <br><br>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div> 
+      <br>
+      <!-- ############################################################            --> 
+      <div class="container"  >
+        <section class="row">
+          <div class="col-md-12"> 
+          <article class="description-content">
+                <h1>Hyperparameter Tuning</h1>
+                <hr class="description-hr"/>
+                <p>Now that the data had been fit to the the models the best hyperparameters needed to be found. Grid search is the process of performing hyper parameter tuning in order to determine the optimal values for a given model. This is significant as the performance of the entire model is based on the hyper parameter values specified. Sklearn provides Grid Search CV as a class that can be imported. 
+                  <img src="/static/images/gridsearch.jpg" class="center"/><br> After a quick look at the scores of the models in there default state the top three performers were Support Vector Machines, Naive Bayes, and Logistic Regression. For this reason these three were chosen to be passed through grid search to see if the performance could be improved further. After looking at the hyperparamters for these three models
+                  a param grid was established for each model. The param grid is a list nested in a dictionary which included the various hyperparameters for each model respectively.
+                  <img src="/static/images/paramgrid.jpg" class="center"/><br> With the param grids created for the top performing models it was now time to fit the training data. 
+                  <img src="/static/images/gridfit3.jpg" class="center"/><br>
+                  <p>Due to the nature of our data we suspected that k-Nearest Neighbors might perform the best if the hyperparameters were adjusted. In order to test this number of n_neighbors was adjusted in a for loop. </p>
+                  <img src="/static/images/knnparam.jpg" class="center"/>
+                  <p>After running this code. It was discovered that the the ideal number of n_neighbors was 31.</p>
+                  <img src="/static/images/knnparam1.jpg" class="center"/> 
+                  <br>
+                  <p>Finally the best parameters could be determined for each of the three models by using (best_params_) and (best_score_)</p>
+                  <img src="/static/images/gridbest.jpg" class="center"/>
+                </p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div> 
+      <br>
+      <!-- ############################################################            -->
+      <div class="container"  >
+        <section class="row">
+          <div class="col-md-12"> 
+          <article class="description-content">
+                <h1>Evaluation</h1>
+                <hr class="description-hr"/>
+                <p>With the best parameters discovered it was time to re-evaluate the models to see which one performed the best. The score for the training and testing set were discovered and ranked from worst to best. </p>
+                <img src="/static/images/dtscore.png" class="center"/><br>
+                <img src="/static/images/knnscore.jpg" class="center"/><br>
+                <img src="/static/images/rfscore.jpg" class="center"/><br>
+                <img src="/static/images/svmscore.jpg" class="center"/><br>
+                <img src="/static/images/nbscore.jpg" class="center"/><br>
+                <img src="/static/images/logregscore.jpg" class="center"/><br>
+                <p>After the second round of evaluation it was discovered the Logistic Regression had the best overall score.</p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div> 
+      <br>
+            </article>
+              
+            </div>
+    
+    
+    
+          
+          
+          
+            <!-- <div class="col-md-10"> -->
+
+  </div>
+
+  <br><br>
+
+  <div class="container">
+    <section class="row">
+        <div class="col-sm-12 text-center">
+
+            <a href="{{ url_for('index') }}"><button type="button" class="btn btn-primary btn-lg "> Home </button></a>
+
+            <a href="{{ url_for('datatabicon') }}"><button type="button" class="btn btn-primary btn-lg "> Data </button></a>
+    
+
+            <a href="{{ url_for('visualicon') }}"><button type="button" class="btn btn-primary btn-lg ">Visualization</button></a>
+        
+        
+            <a href="{{ url_for('modelicon') }}"><button type="button" class="btn btn-primary btn-lg ">Model </button></a>
+                
+    
+            <a href="{{ url_for('precisionicon') }}"><button type="button" class="btn btn-primary btn-lg ">Precision</button></a>
+        
+            <a href="{{ url_for('predictoricon') }}"><button type="button" class="btn btn-primary btn-lg ">Predictor</button></a>
+        </div>  
+    </section>
+</div>
+
+
+    <!-- Start of footer -->
+    <footer class="footer">
+    
+      <p class="text-center" style="font-size:20px"><a href="https://www.linkedin.com/in/georgeoddoye/" target="_blank">George Oddoye</a>, 
+        <a href="https://www.linkedin.com/in/minukhosla/" target="_blank">Minu Khosla</a>,
+        <a href="https://www.linkedin.com/in/vidhyaj1974/" target="_blank">Vidhyanandhi Jegannathan</a>
+      </p>
+      <p class="text-center" style="font-size:24px">George Institute of Technology  Data Analytics : Sentiment Analysis Team</p>
+    </footer>
+    <!-- End of footer -->
+
+    <!-- jQuery CDN -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    {% endblock %}
+  </body>
+
+</html>
